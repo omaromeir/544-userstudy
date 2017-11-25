@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User study form</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/stopwatch.js"></script>
+    <style>
+      .container {margin:5px;}
+      .form-control{margin-top:2px; margin-bottom:2px;}
+      body {margin-top:20px;}
+    </style>
+  </head>
+  <body onload="show();">
+    <!--Content here-->
+    <div class="container">
+      <div class="list-group">
+        <li class="list-group-item"><h3>CPSC 544: Useability study form (HCI Sultans)</h3></li>
+        <a class="list-group-item" href="#dem-q">Demographic questionnaire</a>
+        <a class="list-group-item" href="#tasks">Tasks and timers</a>
+        <a class="list-group-item" href="#exit-q">Exit questionnaire</a>
+      </div>
+    </div>
+
+    <!--Content here-->
+    <div class="container">
+      <label>Subject # </label><label id = "userNum">0000</label>
+      <input type="button" value="Generate" class="btn btn-secondary btn-sm" id="genBtn">
+      <label>Group:</label>
+      <select id="group">
+        <option value="A">Group A</option>
+        <option value="B">Group B</option>
+        <option value="C">Group C</option>
+        <option value="D">Group D</option>
+      </select>
+    </div>
+    <!-- Demographics -->
+    <div id="dem-q" class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading">Demographic questionnaire</div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label>Q1: Age group:</label>
+            <select class="form-control" id="dem-q1">
+              <option>18 and under</option>
+              <option>19 to 25</option>
+              <option>26 to 35</option>
+              <option>36 to 45</option>
+              <option>46 and above</option>
+            </select>
+            <label>Q2: Gender:</label>
+            <select class="form-control" id="dem-q2">
+              <option>Male</option>
+              <option>Female</option>
+              <option>I prefer not to disclose</option>
+            </select>
+            <label>Q3: What type of housing do you live in?</label>
+            <select class="form-control" id="dem-q3">
+              <option>Student residence</option>
+              <option>Apartment</option>
+              <option>Private house</option>
+              <option>Other</option>
+            </select>
+            <input class="form-control" type="text" placeholder="If other, please specify" id="dem-tb1">
+            <label>Q4: Have you used a lending/borrowing solution before (mobile app or website)?</label>
+            <select multiple class="form-control" id="dem-q4">
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+            <input class="form-control" type="text" placeholder="If yes, please specify" id="dem-tb2">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Tasks -->
+    <div id="tasks" class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading">Tasks and timers</div>
+        <div class="panel-body">
+          <div>Timer for task 1: <span id="timerStatus">OFF</span></div>
+          <div>
+            <span id="time" style="display: none;"></span>
+            <!-- <span id="time"">0</span> -->
+            <input type="button" class="btn btn-secondary btn-sm" id="startBtn" value="start" onclick="start();">
+            <input type="button" class="btn btn-secondary btn-sm" id="stopBtn" value="stop" onclick="stop();">
+            <input type="button" class="btn btn-secondary btn-sm" id="saveBtn" value="save">
+            <input type="button" class="btn btn-secondary btn-sm" id="resetBtn" value="reset" onclick="reset();">
+            <br />
+            <label>Q1: How satisfied are you with the procedure you just used?</label>
+            <select class="form-control" id="task-q1">
+              <option value="1">Very satisfied</option>
+              <option value="2">Satisfied</option>
+              <option value="3">Neutral</option>
+              <option value="4">Unsatisfied</option>
+              <option value="5">Very unsatisfied</option>
+            </select>
+          </div>
+          <div>Timer for task 2: <span id="time2" style="display: none;"></span><span id="timerStatus2">OFF</span></div>
+          <div>
+            <span id="time2" style="display: none;"></span>
+            <input type="button" class="btn btn-secondary btn-sm" id="startBtn2" value="start" onclick="start();">
+            <input type="button" class="btn btn-secondary btn-sm" id="stopBtn2" value="stop" onclick="stop();">
+            <input type="button" class="btn btn-secondary btn-sm" id="saveBtn2" value="save">
+            <input type="button" class="btn btn-secondary btn-sm" id="resetBtn2" value="reset" onclick="reset();">
+            <br />
+            <label>Q2: How satisfied are you with the procedure you just used??</label>
+            <select class="form-control" id="task-q2">
+              <option value="1">Very satisfied</option>
+              <option value="2">Satisfied</option>
+              <option value="3">Neutral</option>
+              <option value="4">Unsatisfied</option>
+              <option value="5">Very unsatisfied</option>
+            </select>
+          </div>
+          <div>Timer for task 3: <span id="time3" style="display: none;"></span><span id="timerStatus3">OFF</span></div>
+          <div>
+            <span id="time3" style="display: none;"></span>
+            <input type="button" class="btn btn-secondary btn-sm" id="startBtn3" value="start" onclick="start();">
+            <input type="button" class="btn btn-secondary btn-sm" id="stopBtn3" value="stop" onclick="stop();">
+            <input type="button" class="btn btn-secondary btn-sm" id="saveBtn3" value="save">
+            <input type="button" class="btn btn-secondary btn-sm" id="resetBtn3" value="reset" onclick="reset();">
+            <br />
+            <label>Q3: How satisfied are you with the procedure you just used?</label>
+            <select class="form-control" id="task-q3">
+              <option value="1">Very satisfied</option>
+              <option value="2">Satisfied</option>
+              <option value="3">Neutral</option>
+              <option value="4">Unsatisfied</option>
+              <option value="5">Very unsatisfied</option>
+            </select>
+          </div>
+          <div>Timer for task 4: <span id="time4" style="display: none;"></span><span id="timerStatus4">OFF</span></div>
+          <div>
+            <span id="time3" style="display: none;"></span>
+            <input type="button" class="btn btn-secondary btn-sm" id="startBtn4" value="start" onclick="start();">
+            <input type="button" class="btn btn-secondary btn-sm" id="stopBtn4" value="stop" onclick="stop();">
+            <input type="button" class="btn btn-secondary btn-sm" id="saveBtn4" value="save">
+            <input type="button" class="btn btn-secondary btn-sm" id="resetBtn4" value="reset" onclick="reset();">
+            <br />
+            <label>Q4: How satisfied are you with the procedure you just used?</label>
+            <select class="form-control" id="task-q4">
+              <option value="1">Very satisfied</option>
+              <option value="2">Satisfied</option>
+              <option value="3">Neutral</option>
+              <option value="4">Unsatisfied</option>
+              <option value="5">Very unsatisfied</option>
+            </select>
+          </div>
+          <div>Timer for task 5: <span id="time5" style="display: none;"></span><span id="timerStatus5">OFF</span></div>
+          <div>
+            <span id="time3" style="display: none;"></span>
+            <input type="button" class="btn btn-secondary btn-sm" id="startBtn5" value="start" onclick="start();">
+            <input type="button" class="btn btn-secondary btn-sm" id="stopBtn5" value="stop" onclick="stop();">
+            <input type="button" class="btn btn-secondary btn-sm" id="saveBtn5" value="save">
+            <input type="button" class="btn btn-secondary btn-sm" id="resetBtn5" value="reset" onclick="reset();">
+            <br />
+            <label>Q5: How satisfied are you with the procedure you just used?</label>
+            <select class="form-control" id="task-q5">
+              <option value="1">Very satisfied</option>
+              <option value="2">Satisfied</option>
+              <option value="3">Neutral</option>
+              <option value="4">Unsatisfied</option>
+              <option value="5">Very unsatisfied</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exit -->
+    <div id="exit-q" class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading">Exit questionnaire</div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label>Q1: How useful did you find the app with the lending machine for borrowing tasks?</label>
+            <select class="form-control" id="exit-q1">
+              <option value="1">Very useful</option>
+              <option value="2">Useful</option>
+              <option value="3">Neutral</option>
+              <option value="4">useless</option>
+              <option value="5">Very useless</option>
+            </select>
+            <label>Q2: How useful did you find Facebook for borrowing tasks?</label>
+            <select class="form-control" id="exit-q2">
+              <option value="1">Very useful</option>
+              <option value="2">Useful</option>
+              <option value="3">Neutral</option>
+              <option value="4">useless</option>
+              <option value="5">Very useless</option>
+            </select>
+            <label>Q3: How did you find the digital shelf interface compared to the list of items interface?</label>
+            <select class="form-control" id="exit-q3">
+              <option value="1">Much worse</option>
+              <option value="2">Somewhat worse</option>
+              <option value="3">About the same</option>
+              <option value="4">Somewhat better</option>
+              <option value="5">Much better</option>
+            </select>
+            <input class="form-control" type="text" id="exit-tb1" placeholder="Please, explain">
+            <label>Q4: How did you find using the lending machine compared to borrowing without using the lending machine?</label>
+            <select class="form-control" id="exit-q4">
+              <option value="1">Much worse</option>
+              <option value="2">Somewhat worse</option>
+              <option value="3">About the same</option>
+              <option value="4">Somewhat better</option>
+              <option value="5">Much better</option>
+            </select>
+            <input class="form-control" type="text" id="exit-tb2" placeholder="Please, explain">
+            <div>
+              <label>Q5: Would you use Lendy to borrow an item?</label>
+              <select multiple class="form-control" id="exit-q5">
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+              <input class="form-control" type="text" id="exit-tb3" placeholder="Please, explain">
+            </div>
+            <div>
+              <label>Q6: Would you use Lendy to lend an item?</label>
+              <select multiple class="form-control" id="exit-q6">
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+              <input class="form-control" type="text" id="exit-tb4" placeholder="Please, explain">
+            </div>
+            <div>
+              <label>Q7: Any other suggestions on how to improve Lendy?</label>
+              <input class="form-control" id="exit-tb5" type="text">
+            </div>
+          </div>
+          <div><input type="button" value="submit" class="btn btn-secondary btn-block" id = "submitBtn"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/jq.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script >
+    var time1, time2, time3, time4, time5;
+    function writeToFile(dat){
+      httpString = "http://localhost:8080/ans?answers=" + dat 
+      $.getJSON(httpString, function( data ) {
+        console.log("Writing "+data)
+      });
+    }
+
+    $( "#submitBtn" ).on( "click", function(e) {
+      if (confirm('Do you really want to submit the form?')){
+        console.log("Hi");
+      }
+      else {
+        return false;
+      }
+      var dat = $( "#userNum" ).text() + "|" +
+      $( "#group option:selected" ).val() + "|" +
+      $( "#dem-q1 option:selected" ).text() + "|" +
+      $( "#dem-q2 option:selected" ).text() + "|" +
+      $( "#dem-q3 option:selected" ).text() + "|" +
+      $( "#dem-tb1" ).val() + "|" +
+      $( "#dem-q4 option:selected" ).text() + "|" +
+      $( "#dem-tb2" ).val() + "|" + //Demographic end here
+      time1 + "|" + $( "#task-q1 option:selected" ).val() + "|" +
+      time2 + "|" + $( "#task-q2 option:selected" ).val() + "|" +
+      time3 + "|" + $( "#task-q3 option:selected" ).val() + "|" +
+      time4 + "|" + $( "#task-q4 option:selected" ).val() + "|" +
+      time5 + "|" + $( "#task-q5 option:selected" ).val() + "|" + //All timers here
+      $( "#exit-q1 option:selected" ).val() + "|" +
+      $( "#exit-q2 option:selected" ).val() + "|" +
+      $( "#exit-q3 option:selected" ).val() + "|" +
+      $( "#exit-tb1" ).val() + "|" +
+      $( "#exit-q4 option:selected" ).val() + "|" +
+      $( "#exit-tb2" ).val() + "|" +
+      $( "#exit-q5 option:selected" ).val() + "|" +
+      $( "#exit-tb3" ).val() + "|" +
+      $( "#exit-q6 option:selected" ).val() + "|" +
+      $( "#exit-tb4" ).val() + "|" +
+      $( "#exit-tb5" ).val();
+      console.log(dat);
+      writeToFile(dat);
+    });
+
+    $( "#startBtn" ).on( "click", function(e) {
+      $("#timerStatus").text("ON");
+    });
+    $( "#stopBtn" ).on( "click", function(e) {
+      $("#timerStatus").text("PAUSED");
+    });
+    $( "#resetBtn" ).on( "click", function(e) {
+      $("#timerStatus").text("OFF");
+    });
+    $( "#saveBtn" ).on( "click", function(e) {
+      time1 = $( "#time" ).text();
+    });
+    $( "#startBtn2" ).on( "click", function(e) {
+      $("#timerStatus2").text("ON");
+    });
+    $( "#stopBtn2" ).on( "click", function(e) {
+      $("#timerStatus2").text("PAUSED");
+    });
+    $( "#resetBtn2" ).on( "click", function(e) {
+      $("#timerStatus2").text("OFF");
+    });
+    $( "#saveBtn2" ).on( "click", function(e) {
+      time2 = $( "#time" ).text();
+    });
+    $( "#startBtn3" ).on( "click", function(e) {
+      $("#timerStatus3").text("ON");
+    });
+    $( "#stopBtn3" ).on( "click", function(e) {
+      $("#timerStatus3").text("PAUSED");
+    });
+    $( "#resetBtn3" ).on( "click", function(e) {
+      $("#timerStatus3").text("OFF");
+    });
+    $( "#saveBtn3" ).on( "click", function(e) {
+      time3 = $( "#time" ).text();
+    });
+    $( "#startBtn4" ).on( "click", function(e) {
+      $("#timerStatus4").text("ON");
+    });
+    $( "#stopBtn4" ).on( "click", function(e) {
+      $("#timerStatus4").text("PAUSED");
+    });
+    $( "#resetBtn4" ).on( "click", function(e) {
+      $("#timerStatus4").text("OFF");
+    });
+    $( "#saveBtn4" ).on( "click", function(e) {
+      time4 = $( "#time" ).text();
+    });
+    $( "#startBtn5" ).on( "click", function(e) {
+      $("#timerStatus5").text("ON");
+    });
+    $( "#stopBtn5" ).on( "click", function(e) {
+      $("#timerStatus5").text("PAUSED");
+    });
+    $( "#resetBtn5" ).on( "click", function(e) {
+      $("#timerStatus5").text("OFF");
+    });
+    $( "#saveBtn5" ).on( "click", function(e) {
+      time5 = $( "#time" ).text();
+    });
+
+    $( "#genBtn" ).on( "click", function(e) {
+      var rand = Math.floor(Math.random() * 10000)
+      $( "#userNum" ).text(rand)
+    });
+  </script>
+  </body>
+</html>

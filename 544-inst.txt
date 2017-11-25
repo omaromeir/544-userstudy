@@ -1,0 +1,3 @@
+1. Start web.py: python /Users/oomeir/Documents/544-userstudy/restAPI.py 
+2. Start http-server: http-server /Users/oomeir/Documents/544-userstudy -p 8008
+3. Go to localhost/8008 in GOOGLE CHROME to see form
