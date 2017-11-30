@@ -1,2 +1,5 @@
 *.csv
 *.pyc
+*.Rproj
+*.Rhistory
+*.Rproj.user

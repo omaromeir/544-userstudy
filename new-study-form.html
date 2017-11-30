@@ -65,12 +65,13 @@
             </select>
             <input class="form-control" type="text" placeholder="If other, please specify" id="dem-tb1">
             <label>Q4: Have you used a lending/borrowing solution before (mobile app or website)?</label>
-            <select multiple class="form-control" id="dem-q4">
+            <select multiple size="5"  class="form-control" id="dem-q4">
               <option>Yes</option>
               <option>No</option>
             </select>
             <input class="form-control" type="text" placeholder="If yes, please specify" id="dem-tb2">
           </div>
+          <div><input type="button" value="submit" class="btn btn-secondary btn-block" id = "nothing"></div>
         </div>
       </div>
     </div>
@@ -89,8 +90,8 @@
             <input type="button" class="btn btn-secondary btn-sm" id="saveBtn" value="save">
             <input type="button" class="btn btn-secondary btn-sm" id="resetBtn" value="reset" onclick="reset();">
             <br />
-            <label>Q1: How satisfied are you with the procedure you just used?</label>
-            <select class="form-control" id="task-q1">
+            <label>Q1: How satisfied are you with the interface you just used?</label>
+            <select multiple size="5"  class="form-control" id="task-q1">
               <option value="1">Very satisfied</option>
               <option value="2">Satisfied</option>
               <option value="3">Neutral</option>
@@ -106,8 +107,8 @@
             <input type="button" class="btn btn-secondary btn-sm" id="saveBtn2" value="save">
             <input type="button" class="btn btn-secondary btn-sm" id="resetBtn2" value="reset" onclick="reset();">
             <br />
-            <label>Q2: How satisfied are you with the procedure you just used??</label>
-            <select class="form-control" id="task-q2">
+            <label>Q2: How satisfied are you with the interface you just used??</label>
+            <select multiple size="5"  class="form-control" id="task-q2">
               <option value="1">Very satisfied</option>
               <option value="2">Satisfied</option>
               <option value="3">Neutral</option>
@@ -123,8 +124,8 @@
             <input type="button" class="btn btn-secondary btn-sm" id="saveBtn3" value="save">
             <input type="button" class="btn btn-secondary btn-sm" id="resetBtn3" value="reset" onclick="reset();">
             <br />
-            <label>Q3: How satisfied are you with the procedure you just used?</label>
-            <select class="form-control" id="task-q3">
+            <label>Q3: How satisfied are you with the interface you just used?</label>
+            <select multiple size="5"  class="form-control" id="task-q3">
               <option value="1">Very satisfied</option>
               <option value="2">Satisfied</option>
               <option value="3">Neutral</option>
@@ -140,8 +141,8 @@
             <input type="button" class="btn btn-secondary btn-sm" id="saveBtn4" value="save">
             <input type="button" class="btn btn-secondary btn-sm" id="resetBtn4" value="reset" onclick="reset();">
             <br />
-            <label>Q4: How satisfied are you with the procedure you just used?</label>
-            <select class="form-control" id="task-q4">
+            <label>Q4: How satisfied are you with the interface you just used?</label>
+            <select multiple size="5"  class="form-control" id="task-q4">
               <option value="1">Very satisfied</option>
               <option value="2">Satisfied</option>
               <option value="3">Neutral</option>
@@ -157,8 +158,8 @@
             <input type="button" class="btn btn-secondary btn-sm" id="saveBtn5" value="save">
             <input type="button" class="btn btn-secondary btn-sm" id="resetBtn5" value="reset" onclick="reset();">
             <br />
-            <label>Q5: How satisfied are you with the procedure you just used?</label>
-            <select class="form-control" id="task-q5">
+            <label>Q5: How satisfied are you with the interface you just used?</label>
+            <select multiple size="5" class="form-control" id="task-q5">
               <option value="1">Very satisfied</option>
               <option value="2">Satisfied</option>
               <option value="3">Neutral</option>
@@ -177,7 +178,7 @@
         <div class="panel-body">
           <div class="form-group">
             <label>Q1: How useful did you find the app with the lending machine for borrowing tasks?</label>
-            <select class="form-control" id="exit-q1">
+            <select multiple size="5"  class="form-control" id="exit-q1">
               <option value="1">Very useful</option>
               <option value="2">Useful</option>
               <option value="3">Neutral</option>
@@ -185,7 +186,7 @@
               <option value="5">Very useless</option>
             </select>
             <label>Q2: How useful did you find Facebook for borrowing tasks?</label>
-            <select class="form-control" id="exit-q2">
+            <select multiple size="5" class="form-control" id="exit-q2">
               <option value="1">Very useful</option>
               <option value="2">Useful</option>
               <option value="3">Neutral</option>
@@ -193,7 +194,7 @@
               <option value="5">Very useless</option>
             </select>
             <label>Q3: How did you find the digital shelf interface compared to the list of items interface?</label>
-            <select class="form-control" id="exit-q3">
+            <select multiple size="5" class="form-control" id="exit-q3">
               <option value="1">Much worse</option>
               <option value="2">Somewhat worse</option>
               <option value="3">About the same</option>
@@ -202,7 +203,7 @@
             </select>
             <input class="form-control" type="text" id="exit-tb1" placeholder="Please, explain">
             <label>Q4: How did you find using the lending machine compared to borrowing without using the lending machine?</label>
-            <select class="form-control" id="exit-q4">
+            <select multiple size="5" class="form-control" id="exit-q4">
               <option value="1">Much worse</option>
               <option value="2">Somewhat worse</option>
               <option value="3">About the same</option>
@@ -212,7 +213,7 @@
             <input class="form-control" type="text" id="exit-tb2" placeholder="Please, explain">
             <div>
               <label>Q5: Would you use Lendy to borrow an item?</label>
-              <select multiple class="form-control" id="exit-q5">
+              <select multiple size="5"  class="form-control" id="exit-q5">
                 <option>Yes</option>
                 <option>No</option>
               </select>
@@ -220,7 +221,7 @@
             </div>
             <div>
               <label>Q6: Would you use Lendy to lend an item?</label>
-              <select multiple class="form-control" id="exit-q6">
+              <select multiple size="5"  class="form-control" id="exit-q6">
                 <option>Yes</option>
                 <option>No</option>
               </select>
@@ -228,7 +229,7 @@
             </div>
             <div>
               <label>Q7: Any other suggestions on how to improve Lendy?</label>
-              <input class="form-control" id="exit-tb5" type="text">
+              <textarea class="form-control" id="exit-tb5" rows="3"></textarea>
             </div>
           </div>
           <div><input type="button" value="submit" class="btn btn-secondary btn-block" id = "submitBtn"></div>
