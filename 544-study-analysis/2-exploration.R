@@ -1,3 +1,12 @@
+library(ggplot2)
+library(ggthemes)
+library(dplyr)
+library(stringr)
+library(reshape2)
+library(knitr)
+library(xtable)
+library(lubridate)
+
 dat <- read.csv("data/data-ready.text", sep = "|", check.names = F)
 
 # Split quant. data into groups for time, satisfaction, and preference
@@ -9,8 +18,9 @@ dat.preference <- dat[c("participant-number", "q1", "q2", "q3", "q4")]
 names(dat.preference) <- c("p", "machine_usefulness", "fb_usefulness", "shelf_vs_list", "app_vs_fb")
 
 # Plots for most important measures
-ggplot(melt(dat.time[2:4]),aes(x=variable,y=value, color=h)) +
+ggplot(melt(dat.time[2:5]),aes(x=variable,y=value, color=h)) +
   geom_point() +
+  stat_summary(aes(y = value,group=1), fun.y=mean, colour="red", geom="line",group=1)+
   theme_classic()
 
 ggplot(melt(dat.time[5:6]),aes(x=variable,y=value, color=variable)) +
@@ -18,8 +28,13 @@ ggplot(melt(dat.time[5:6]),aes(x=variable,y=value, color=variable)) +
   theme_classic()
 
 ggplot(melt(dat.satisfaction[2:6]),aes(x=variable,y=value, color=variable)) +
-  geom_point() +
+  geom_boxplot() +
   theme_classic()
+
+ggplot(melt(dat.preference[2:3]),aes(x=variable,y=value, color=variable)) +
+  geom_boxplot() +
+  theme_classic()
+
 
 # summary stats
 mean(dat.satisfaction$shelf)
@@ -47,11 +62,23 @@ t.test(dat.time$shelf, dat.time$list)
 
 # wilcox.test(dat.satisfaction$list, dat.satisfaction$fb)
 
-# ANOVA compare 3 groups
-groups = c(dat.time$shelf, dat.time$list, dat.time$fb)
-fac = factor(rep(letters[1:3], each = 16))
-fit = lm(formula = groups~fac)
-anova(fit)
-# anova <- aov(list~, data = dat.time)
-summary(anova)
+# Prepare for ANOVA
+dat.aov <- melt(dat.time[2:5])
 
+fit <- lm(formula = value ~ variable * h, data = dat.aov)
+anova(fit)
+
+aov.fit <- aov(formula = value ~ variable * h, data = dat.aov)
+summary(aov.fit)
+TukeyHSD(aov.fit, "variable", ordered = TRUE)
+# Significant effect of interface, but no interaction effect of housing type and interface
+
+# Prepare data to run friedman test of satisfaction
+dat.fr <- as.matrix(dat.satisfaction[2:4])
+friedman.test(dat.fr)
+
+wilcox.test(dat.satisfaction$list, dat.satisfaction$fb)
+wilcox.test(dat.satisfaction$shelf, dat.satisfaction$fb)
+wilcox.test(dat.satisfaction$list, dat.satisfaction$shelf)
+
+wilcox.test(dat.preference$machine_usefulness, dat.preference$fb_usefulness)
