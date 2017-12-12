@@ -78,6 +78,10 @@ ggsave("usefulness.png", scale = 1, path = "plots/")
 kable(dat.er[3:4] %>% 
   summarise_all(funs(mean, median, sd)))
 
+xtable(melt(dat.er[3:4]) %>% 
+         group_by(variable) %>% 
+        summarise_all(funs(mean, median, sd)))
+
 kable(dat.satisfaction[2:6] %>% 
   summarise_all(funs(mean)))
 kable(dat.satisfaction[2:6] %>% 
@@ -91,9 +95,22 @@ kable(dat.time[3:7] %>%
         summarise_all(funs(median)))
 kable(dat.time[3:7] %>% 
         summarise_all(funs(sd)))
+
+xtable(melt(dat.time[3:7]) %>% 
+  group_by(variable) %>% 
+  summarise_all(funs(mean, median, sd)))
 
 kable(dat.preference[2:3] %>% 
         summarise_all(funs(mean, median)))
+
+
+xtable(melt(dat.satisfaction[2:6]) %>% 
+         group_by(variable) %>% 
+         summarise_all(funs(mean, median, sd)))
+
+xtable(melt(dat.preference[2:3]) %>% 
+        group_by(variable) %>% 
+        summarise_all(funs(mean, median, sd)))
 
 #' To prepare time data before running mixed factorial ANOVA, 
 #' run tests to determine if ANOVA assumptions hold. 
@@ -125,6 +142,11 @@ TukeyHSD(aov.fit, "variable", ordered = TRUE)
 #' Significant effect of interface, but no interaction effect of housing type and interface
 #' Difference between FB and shelf and FB and list is significant.
 
+dat.ret <- melt(dat.time[dat.time$p != 2589, 6:7])
+t.test(subset(dat.ret, variable == "m_return")$value, subset(dat.ret, variable == "fb_return")$value, paired = T)
+
+#' No significant effect of return task time!
+#' 
 #' Prepare data to run friedman test on satisfaction (3 factor)
 dat.fr <- as.matrix(dat.satisfaction[2:4])
 friedman.test(dat.fr)
@@ -168,9 +190,55 @@ kable(dat.preference[4:5])
 kable(dat.preference[4:5] %>% 
         summarise_all(funs(mean, median)))
 
+kable(melt(dat.preference[4:5]) %>% 
+        group_by(variable) %>% 
+        summarise_all(funs(mean, median, sd)))
+
 #' There's no need to analyze this. A plot summarizes the results.
 ggplot(melt(dat.preference[4:5]),aes(x=variable,y=value, color=variable)) +
   geom_boxplot() +
   ylab("Preference (1 Much worse to 5 Much better)") + xlab("Comparison")
 
 ggsave("pref-summary.png", scale = 1, path = "plots/")
+
+#' Barcharts with CIs
+std.err <- function(x) sd(x)/sqrt(length(x))
+
+timedat <- melt(dat.time[2:7]) %>% 
+  group_by(variable, h) %>% 
+  summarise_all(funs(mean, std.err))
+
+ggplot(timedat,aes(x=variable,y=mean, fill=h)) +
+  geom_bar(stat="identity",position="dodge") + 
+  geom_errorbar(aes(ymin=mean-std.err, ymax=mean+std.err), width=.2, position=position_dodge(.9)) +
+  ylab("Time") + xlab("Interface type")
+
+ggsave("bar-time.png", scale = 1, path = "plots/")
+
+satdat <- melt(dat.satisfaction[2:7]) %>% 
+  group_by(variable, h) %>% 
+  summarise_all(funs(mean, std.err))
+
+ggplot(satdat,aes(x=variable,y=mean, fill=h)) +
+  geom_bar(stat="identity",position="dodge") + 
+  geom_errorbar(aes(ymin=mean-std.err, ymax=mean+std.err), width=.2, position=position_dodge(.9)) +
+  ylab("Satisfaction (1-5)") + xlab("Interface type")
+
+ggsave("bar-satisfaction.png", scale = 1, path = "plots/")
+
+prefdat <- melt(dat.preference[c(2, 3, 6)]) %>% 
+  group_by(variable, h) %>% 
+  summarise_all(funs(mean, std.err))
+
+ggplot(prefdat,aes(x=variable,y=mean, fill=h)) +
+  geom_bar(stat="identity",position="dodge") + 
+  geom_errorbar(aes(ymin=mean-std.err, ymax=mean+std.err), width=.2, position=position_dodge(.9)) +
+  ylab("Usefulness (1-5)") + xlab("Interface type")
+
+ggsave("bar-usefulness.png", scale = 1, path = "plots/")
+
+#' Adjusted p-values for pairwise tests
+#' The values are of the following tests: 1) Satisfaction list vs Facebook 
+#' 2) satisfaction shelf vs Facebook 3) satisfaction list vs shelf 
+#' 4) usefulness machine vs FB 5) Errors shelf vs list
+p.adjust(c(0.008271, 0.04284,0.1201, 0.01178, 0.009371), method = "bonferroni")
