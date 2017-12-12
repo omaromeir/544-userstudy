@@ -237,8 +237,22 @@ ggplot(prefdat,aes(x=variable,y=mean, fill=h)) +
 
 ggsave("bar-usefulness.png", scale = 1, path = "plots/")
 
+errdat <- melt(dat.er[2:4]) %>% 
+  group_by(variable, h) %>% 
+  summarise_all(funs(mean, std.err))
+
+ggplot(errdat,aes(x=variable,y=mean, fill=h)) +
+  geom_bar(stat="identity",position="dodge") + 
+  geom_errorbar(aes(ymin=mean-std.err, ymax=mean+std.err), width=.2, position=position_dodge(.9)) +
+  ylab("Error count") + xlab("Interface type")
+
+ggsave("bar-error.png", scale = 1, path = "plots/")
+
 #' Adjusted p-values for pairwise tests
 #' The values are of the following tests: 1) Satisfaction list vs Facebook 
 #' 2) satisfaction shelf vs Facebook 3) satisfaction list vs shelf 
 #' 4) usefulness machine vs FB 5) Errors shelf vs list
-p.adjust(c(0.008271, 0.04284,0.1201, 0.01178, 0.009371), method = "bonferroni")
+tests <- c("sat list vs FB", "sat shelf vs FB", "sat shelf vs list", "use lendy vs FB", "error shelf vs list")
+p_val <- p.adjust(c(0.008271, 0.04284,0.1201, 0.01178, 0.009371), method = "bonferroni")
+adj.tests <- data.frame(tests, p_val)
+kable(adj.tests)
