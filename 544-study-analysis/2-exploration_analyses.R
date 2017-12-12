@@ -266,7 +266,7 @@ errpref <- melt(dat.preference[4:6]) %>%
 ggplot(errpref,aes(x=variable,y=mean, fill=h)) +
   geom_bar(stat="identity",position="dodge") + 
   geom_errorbar(aes(ymin=mean-std.err, ymax=mean+std.err), width=.2, position=position_dodge(.9)) +
-  ylab("Error count") + xlab("Interface type")
+  ylab("Preference (1 much worse to 5 much better)") + xlab("Interface type")
 
 ggsave("pref-bar.png", scale = 1, path = "plots/")
 
