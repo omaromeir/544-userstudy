@@ -134,11 +134,11 @@ anova(fit)
 
 #' This is the same as above but using the ANOVA native function of R
 aov.fit <- aov(formula = value ~ variable * h, data = dat.aov)
-summary(aov.fit)
+xtable(summary(aov.fit), caption = "The full results of ANOVA", label = "t:aov")
 
 #' Tukey Honest Significant Differences is a post-hoc test 
 #' to determine the difference in means in terms of the UI type factor (variable).
-TukeyHSD(aov.fit, "variable", ordered = TRUE)
+xtable(TukeyHSD(aov.fit, "variable", ordered = TRUE)$variable, caption = "The full results of TukeyHSD test", label = "thsd")
 #' Significant effect of interface, but no interaction effect of housing type and interface
 #' Difference between FB and shelf and FB and list is significant.
 
@@ -160,6 +160,7 @@ wilcox.test(dat.satisfaction$shelf, dat.satisfaction$fb, paired = T, alternative
 wilcox.test(dat.satisfaction$list, dat.satisfaction$shelf, paired = T, alternative = "less")
 #' No significant difference between list and shelf though.
 
+wilcox.test(dat.satisfaction$m_return, dat.satisfaction$fb_return, paired = T, alternative = "less")
 #' Test usefulness. Significant results. 
 wilcox.test(dat.preference$machine_usefulness, dat.preference$fb_usefulness, paired = T)
 
